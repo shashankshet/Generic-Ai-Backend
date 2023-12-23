@@ -53,7 +53,13 @@ async def get_answer(question: Question = Body(...)):
     answer = chain.run(input_documents=doc_result, question=question.question)
 
     return {"answer": answer}
-
+    
+@app.get("/health")
+async def health():
+    try:
+        return {"health":"ok"}
+    except Exception as e:
+        raise e
 
 # Run the FastAPI application
 if __name__ == "__main__":
